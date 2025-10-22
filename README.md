@@ -4,12 +4,12 @@
 # Future Improvements
 - this ui is test only, so ui needs generous improvements
 - some known issues, state is not preserved for now, so reloading of match page will wipe eveerything
-- ~~ timer is yet to be added ~~
+- ~~timer is yet to be added~~
 - and much more... in testing right now
 
 👻
 
-# Changelog 
+# Changelog _Oct 22, 2025 v1.0.1_
 - updated architecture
 - now have multiple socket io server load balanced by a nginx proxy
 - uses the Redis addapter in socket io to handle scalability
