@@ -2,23 +2,24 @@ import{ create }from "zustand";
 
 const useIde = create((set) => ({
     theme: 0, //def is ligh
-    qid:0,
+    qSetId:null,
+    qid: 0,
     qs: [],
     langid:null,
     langdriver:null,
-    pid:null,
-    opid:null,
+    pid:null,//currp
+    opid:null,//opponentn
     pic:null,
     oppic:null,
     pname:null,
     opname:null,
-    myqs:0,
+    myqs:0,//solved
     opqs:0,
     code:"",
     compmsg:null,
     comperr:null,
     compout:null,
-    setqs: (qs) => (set(() => ({qs: qs}))),
+    setqs: (qs, qsid) => (set(() => ({qs: qs, qSetId: qsid}))),
     settheme: (theme) => (set(() => ({theme: theme}))),
     setqid: (qid) => (set(() => ({qid: qid}))),
     setlangid: (langid) => (set(() => ({langid: langid}))), 

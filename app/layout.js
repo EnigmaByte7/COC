@@ -29,17 +29,11 @@ export default function RootLayout({ children }) {
   useEffect(() => {
 
     init();
-    console.log(socket)
+    console.log("from layout : ", socket)
     return () =>{
       del();
     }
   }, [])
-
-  useEffect(() => {
-    if (socket) {
-      console.log("Socket initialized:", socket);
-    }
-  }, [socket])
 
   return (
     <html lang="en">
