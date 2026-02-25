@@ -18,8 +18,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       //   //const userdocid = await checkuser(user)
       //   token.docid = userdocid.id
       if(user){
-      token.docId = user.id
-      }
+        token.docId = user.id
+        }
       return token;
     },
     async session({token, session}){

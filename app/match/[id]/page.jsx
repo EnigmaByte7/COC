@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect,  } from 'react'
+import React, { useEffect, useId,  } from 'react'
 import useSocket from '@/app/socket'
 import { useRouter } from 'next/navigation';
 import IDE from '@/app/components/IDE';
@@ -12,51 +12,32 @@ export default function page() {
   const router = useRouter();
   const {socket, mid,} = useSocket();
   const {qs, qid,setqid} = useIde()
-
  
   console.log(qs);
   
   useEffect( () => {
-    // const verify = async () => {
-    //   const res = await fetch('http://localhost:8000/verify', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({mid: mid})
-    //   })
+    socket?.on('match:sync', (data) => {
+      console.log('resync..', data);
 
-    //   const message = await res.json();
-    //   console.log(message.comment)
-    //   if(message.comment == 0){
-    //     router.push('/')
-    //   }
-    // }
-    // verify();
+      const { scores, status } = data;
+      useIde.setState({ myqs: 0, opqs: 0 });
 
-    const handleReceive = (message) => {
-      console.log('Received message:', message);
-  
-      if (message.comment === 'won') {
-        setw(true);
-      } else if (message.comment === 'lose') {
-        setl(true);
+      if (scores) {
+        Object.keys(scores).forEach(uid => {
+          if (uid === socket?.auth?.token) {
+            useIde.setState({ myqs: scores[uid] });
+          } else {
+            useIde.setState({ opqs: scores[uid] });
+          }
+        });
       }
-      else if(message.comment === 'left') { 
-        alert('Opponent left the game')
-      }
-      else if(message.comment === 'draw') {
-        alert('Game Draw')
-      }
-    };
-  
-    socket.on('receive', handleReceive);
-  
+    });
+
     return () => {
-      socket.off('receive', handleReceive); 
+      socket?.off('match:sync');
     };
 
-  }, [mid, socket])
+  }, [mid, socket?.id])
 
   const nextques = ()=>{
     //0..1..2..3
@@ -70,11 +51,13 @@ export default function page() {
   }
 
   return (
-    <div className='flex flex-col gap-3 p-2 w-full h-full bg-black'>
+    <div className='flex flex-col gap-5 p-2 w-full h-full bg-black'>
       <Versus />
       <Controls nextques={nextques} prevques={prevques} />
-      <Ques ques={qs[qid]} />
-      <IDE ques={qs[qid]}/>
+      <div className='flex flex-row gap-4'>
+        <Ques ques={qs[qid]} />
+        <IDE ques={qs[qid]} />
+      </div>
     </div>
   )
 }

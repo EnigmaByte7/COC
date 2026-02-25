@@ -22,16 +22,16 @@ export default function VS_Page() {
   return (
         <div className='flex justify-between items-center flex-row w-full min-h-screen px-5'>
           <div className='flex justify-center items-center flex-col gap-5'>    
-            <Image src={session?.user.image} width={100} height={100} alt='searching' />
+            <Image src={session?.user.image} width={100} height={100} alt='searching' className='rounded-full object-cover'/>
            <h3 className='font-clash text-3xl'>{session?.user.name}</h3> 
           </div>
           
           <div className='flex justify-center items-center flex-col gap-5'>    
-           <h3 className='font-clash text-3xl font-extrabold'>VS</h3> 
+            <img src={'/vs.gif'} className='w-20 h-20'></img>
           </div>
 
           <div className='flex justify-center items-center flex-col gap-5'>    
-            <Image src={opponentImage} width={100} height={100} alt='searching' />
+            <Image src={opponentImage} width={100} height={100} alt='searching' className='rounded-full object-cover'/>
            <h3 className='font-clash text-3xl'>{opponentName}</h3> 
           </div>
         </div>
