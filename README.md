@@ -28,7 +28,7 @@
 - data is persisting now
 - e2e tests were performed
 - replaced kafka with redis streams
-- new design [here]('https://app.eraser.io/workspace/GetTMBOb99Sk3KImaK2T?origin=share')
+- new design [here](https://app.eraser.io/workspace/GetTMBOb99Sk3KImaK2T?origin=share)
 
 
 ## Screenshots
